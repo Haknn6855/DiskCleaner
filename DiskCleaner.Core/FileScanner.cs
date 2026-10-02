@@ -6,7 +6,9 @@ namespace DiskCleaner.Core
         {
             List<FileInfo> fileInfo = new List<FileInfo>();
 
-            var files = Directory.GetFiles(directoryPath);
+            var enumOptions = new EnumerationOptions {RecurseSubdirectories = true};
+
+            var files = Directory.GetFiles(directoryPath, "*", enumOptions);
             
             foreach (var file in files)
             {
