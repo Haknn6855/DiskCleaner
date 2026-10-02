@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DiskCleaner.Cli/DiskCleaner.Cli.csproj" />
+  <Project Path="DiskCleaner.Core/DiskCleaner.Core.csproj" />
+</Solution>

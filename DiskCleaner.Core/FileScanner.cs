@@ -1,0 +1,19 @@
+namespace DiskCleaner.Core
+{
+    public class FileScanner
+    {
+        public IEnumerable<FileInfo> ScanFiles(string directoryPath)
+        {
+            List<FileInfo> fileInfo = new List<FileInfo>();
+
+            var files = Directory.GetFiles(directoryPath);
+            
+            foreach (var file in files)
+            {
+                Console.WriteLine("Trying to scan file: " + file);
+                fileInfo.Add(new FileInfo(file));
+            }
+            return fileInfo;
+        }
+    }
+}
