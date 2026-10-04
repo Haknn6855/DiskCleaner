@@ -55,6 +55,15 @@ foreach (var d in directories)
    allFiles.AddRange(files);
 }
 
+foreach (var f in allFiles)
+{
+    if(f.Length == 0)
+    {
+        duplicateRemover.RemoveDuplicate(f);
+        Console.WriteLine("Removing empty file: " + f.FullName);
+    }
+}
+
 var sizeGroups = duplicateFinder.GroupBySize(allFiles);
 Console.WriteLine($"Found {sizeGroups.Count} unique file sizes.");
 
