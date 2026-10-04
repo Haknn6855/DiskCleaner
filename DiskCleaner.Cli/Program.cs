@@ -2,6 +2,7 @@
 
 var scanner = new FileScanner();
 var duplicateFinder = new DuplicateFinder();
+var duplicateRemover = new DuplicateRemover();
 
 List<string> directories = new List<string>();
 
@@ -52,10 +53,10 @@ foreach (var d in directories)
    var files = scanner.ScanFiles(d);
    var fileCount = files.Count();
    allFiles.AddRange(files);
-   Console.WriteLine($"Scanned {fileCount} files in directory: {d}");
 }
 
 var sizeGroups = duplicateFinder.GroupBySize(allFiles);
+Console.WriteLine($"Found {sizeGroups.Count} unique file sizes.");
 
 foreach (var i in sizeGroups)
 {
@@ -74,10 +75,23 @@ foreach (var i in sizeGroups)
             }
             else
             {
-                Console.WriteLine($"Duplicate files found: {j.Key}");
-                foreach (var file in j.Value)
+                var smallestFile = j.Value[0];
+
+                foreach (var f in j.Value)
                 {
-                    Console.WriteLine($" - {file.FullName}");
+                    if(f.CreationTime < smallestFile.CreationTime)
+                    {
+                        smallestFile = f;
+                    }
+                }
+
+                foreach (var f in j.Value)
+                {
+                    if(f.FullName != smallestFile.FullName)
+                    {
+                        Console.WriteLine($"Duplicate found: {f.FullName} (keeping {smallestFile.FullName})");
+                        duplicateRemover.RemoveDuplicate(f);
+                    }
                 }
             }
         }

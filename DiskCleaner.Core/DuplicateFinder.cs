@@ -4,10 +4,15 @@ namespace DiskCleaner.Core
     public class DuplicateFinder
     {
         public Dictionary<long, List<FileInfo>> GroupBySize(IEnumerable<FileInfo> files)
-        {
+        {   
             var fileInfos = new Dictionary<long, List<FileInfo>>();
             foreach (var file in files)
-            {
+            {   
+                if(file.Length == 0)
+                {
+                    continue;
+                }
+
                 var fileSize = file.Length;
 
                 if (fileInfos.ContainsKey(fileSize))
