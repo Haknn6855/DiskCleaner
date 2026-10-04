@@ -65,12 +65,21 @@ foreach (var i in sizeGroups)
     }
     else
     {
-        Console.WriteLine($"Duplicate found! Size: {i.Key} bytes.");
-        foreach (var value in i.Value)
+        var hashGroups = duplicateFinder.GroupByHash(i.Value);
+        foreach (var j in hashGroups)
         {
-            Console.WriteLine($"Duplicate files are: {value.FullName}");
-            var fileHash = duplicateFinder.FindFileHash(value);
-            Console.WriteLine($"File Hash: {fileHash}");
+            if(j.Value.Count < 2)
+            {
+                continue;
+            }
+            else
+            {
+                Console.WriteLine($"Duplicate files found: {j.Key}");
+                foreach (var file in j.Value)
+                {
+                    Console.WriteLine($" - {file.FullName}");
+                }
+            }
         }
     }
 }

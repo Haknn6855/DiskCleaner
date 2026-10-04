@@ -21,6 +21,25 @@ namespace DiskCleaner.Core
             }
             return fileInfos;
         }
+
+        public Dictionary<string, List<FileInfo>> GroupByHash(IEnumerable<FileInfo> files)
+        {
+            var fileInfos = new Dictionary<string, List<FileInfo>>();
+            foreach (var file in files)
+            {
+                var fileHash = FindFileHash(file);
+
+                if (fileInfos.ContainsKey(fileHash))
+                {
+                    fileInfos[fileHash].Add(file);
+                }
+                else
+                {
+                    fileInfos[fileHash] = new List<FileInfo> { file };
+                }
+            }
+            return fileInfos;
+        }
         public string FindFileHash(FileInfo file)
         {
             using var stream = file.OpenRead();
