@@ -46,6 +46,33 @@ if(directories.Count == 0)
     return;
 }
 
+bool hasRemovableDrive = false;
+
+foreach (var d in directories)
+{
+    if(duplicateRemover.IsRemovableDrive(d))
+    {
+        hasRemovableDrive = true;
+        Console.WriteLine($"Warning: The directory '{d}' is on a removable drive. Proceed with caution.");
+    }
+}
+
+if(hasRemovableDrive)
+{
+    Console.WriteLine("Files on removable drives will be deleted directly. Do you want to continue? (y/n)");
+
+    string? confirmation = Console.ReadLine();
+    if(confirmation == null || confirmation.Trim().ToLower() != "y")
+    {
+        Console.WriteLine("Operation cancelled by user.");
+        return;
+    }
+    else
+    {
+        Console.WriteLine("Proceeding with deletion on removable drives.");
+    }
+}
+
 List<FileInfo> allFiles = new List<FileInfo>();
 
 foreach (var d in directories)
