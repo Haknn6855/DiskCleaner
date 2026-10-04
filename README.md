@@ -4,7 +4,7 @@ A console tool to clean your disks. Finds and removes duplicate files.
 
 ## How it works
 
-Files are grouped by their size, the ones with the same sizes are then compared by their SHA-256 Hash digest, and the oldest copy is kept, others are moved to the Recycle Bin.
+Files are grouped by their size, the ones with the same sizes are then compared by their SHA-256 Hash digest, and the oldest copy is kept, others are moved to the Recycle Bin. (Files are compared by content, not by name).
 
 ## Usage 
 

@@ -59,7 +59,7 @@ foreach (var d in directories)
 
 if(hasRemovableDrive)
 {
-    Console.WriteLine("Files on removable drives will be deleted directly. Do you want to continue? (y/n)");
+    Console.WriteLine("Duplicate files on removable drives will be deleted directly. Do you want to continue? (y/n)");
 
     string? confirmation = Console.ReadLine();
     if(confirmation == null || confirmation.Trim().ToLower() != "y")
@@ -145,4 +145,11 @@ foreach (var i in sizeGroups)
             }
         }
     }
+}
+
+Console.WriteLine("Press enter to exit...");
+var answer = Console.ReadKey();
+if(answer.Key == ConsoleKey.Enter)
+{
+    return;
 }
