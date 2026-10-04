@@ -20,13 +20,13 @@ namespace DiskCleaner.Core
         {
             try
             {
-                var driveName = Path.GetPathRoot(path);
-                if (driveName == null)
+                var driveIsim = Path.GetPathRoot(path);
+                if (driveIsim == null)
                 {
                     return false;
                 }
-                
-                var drive = new DriveInfo(driveName);
+
+                var drive = new DriveInfo(driveIsim);
                 return drive.DriveType == DriveType.Removable;
             }
             catch(ArgumentException)
