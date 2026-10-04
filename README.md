@@ -12,9 +12,7 @@ Requires the .NET 10 SDK.
 
 From the repository folder, run:
 
-```
-   dotnet run --project DiskCleaner.Cli
-```
+Download from Releases, extract, run DiskCleaner.Cli.exe.
 
 And follow the instructions.
 
