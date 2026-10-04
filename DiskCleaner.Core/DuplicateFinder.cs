@@ -8,6 +8,11 @@ namespace DiskCleaner.Core
             var fileInfos = new Dictionary<long, List<FileInfo>>();
             foreach (var file in files)
             {   
+                if(file.Length == 0)
+                {
+                    continue;
+                }
+                
                 var fileSize = file.Length;
 
                 if (fileInfos.ContainsKey(fileSize))
@@ -27,7 +32,19 @@ namespace DiskCleaner.Core
             var fileInfos = new Dictionary<string, List<FileInfo>>();
             foreach (var file in files)
             {
-                var fileHash = FindFileHash(file);
+                string fileHash;
+                try
+                {
+                    fileHash = FindFileHash(file);
+                }
+                catch(IOException)
+                {
+                    continue;
+                }
+                catch(UnauthorizedAccessException)
+                {
+                    continue;
+                }
 
                 if (fileInfos.ContainsKey(fileHash))
                 {

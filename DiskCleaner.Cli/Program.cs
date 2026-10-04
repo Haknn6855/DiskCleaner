@@ -52,6 +52,7 @@ foreach (var d in directories)
 {
    var files = scanner.ScanFiles(d);
    var fileCount = files.Count();
+   Console.WriteLine($"Scanned {fileCount} files in directory: {d}");
    allFiles.AddRange(files);
 }
 
@@ -59,8 +60,14 @@ foreach (var f in allFiles)
 {
     if(f.Length == 0)
     {
-        duplicateRemover.RemoveDuplicate(f);
-        Console.WriteLine("Removing empty file: " + f.FullName);
+        if(duplicateRemover.RemoveDuplicate(f))
+        {
+            Console.WriteLine($"Deleted empty file: {f.FullName}");
+        }
+        else
+        {
+            Console.WriteLine($"Failed to delete empty file: {f.FullName}");
+        }
     }
 }
 
@@ -98,8 +105,14 @@ foreach (var i in sizeGroups)
                 {
                     if(f.FullName != smallestFile.FullName)
                     {
-                        Console.WriteLine($"Duplicate found: {f.FullName} (keeping {smallestFile.FullName})");
-                        duplicateRemover.RemoveDuplicate(f);
+                        if(duplicateRemover.RemoveDuplicate(f))
+                        {
+                            Console.WriteLine($"Deleted duplicate file: {f.FullName}, kept: {smallestFile.FullName}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Failed to delete duplicate file: {f.FullName}");
+                        }
                     }
                 }
             }

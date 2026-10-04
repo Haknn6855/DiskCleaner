@@ -9,12 +9,28 @@ namespace DiskCleaner.Core
             try
             {
                 FileSystem.DeleteFile(fileInfo.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                Console.WriteLine("Deleted file: " + fileInfo.FullName);
                 return true;
             }
             catch
             {
-                Console.WriteLine("Failed to delete file: " + fileInfo.FullName);
+                return false;
+            }
+        }
+        public bool IsRemovableDrive(string path)
+        {
+            try
+            {
+                var driveName = Path.GetPathRoot(path);
+                if (driveName == null)
+                {
+                    return false;
+                }
+                
+                var drive = new DriveInfo(driveName);
+                return drive.DriveType == DriveType.Removable;
+            }
+            catch(ArgumentException)
+            {
                 return false;
             }
         }

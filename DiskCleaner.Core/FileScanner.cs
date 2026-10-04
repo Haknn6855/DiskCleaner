@@ -12,7 +12,6 @@ namespace DiskCleaner.Core
             
             foreach (var file in files)
             {
-                Console.WriteLine("Trying to scan file: " + file);
                 fileInfo.Add(new FileInfo(file));
             }
             return fileInfo;
