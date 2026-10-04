@@ -1,6 +1,6 @@
 # Disk Cleaner
 
-A console tool to clean your disks. Finds and removes duplicate files.
+A tool to clean your disks. Finds and removes duplicate files.
 
 ## How it works
 
@@ -23,6 +23,7 @@ And follow the instructions.
 - Windows only. The Recycle Bin integration uses Windows APIs.
 - Deletion performed in a removable disk is permanent. This is an early version, back up important files before using.
 - All empty files are deleted.
+- DO NOT ENTER FOLDERS THAT ARE INSIDE EACH OTHER, OR THE SAME FOLDER TWİCE. THE SAME FİLE MAY BE SEEN AS ITS OWN DUPLICATE. 
 
 ## License
 
