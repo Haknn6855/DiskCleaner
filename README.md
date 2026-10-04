@@ -1,4 +1,4 @@
-# Disk Cleaner
+# DiskCleanerDFF
 
 A tool to clean your disks. Finds and removes duplicate files.
 
